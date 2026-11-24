@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import IntroPanel from "./IntroPanel";
 import ProjectCard from "./ProjectCard";
-import { showcaseIntro, projectsData } from "../data/projects";
+import { showcaseIntro, getShuffledProjects } from "../data/projects";
 import "./ProjectShowcase.css";
 
 // Register ScrollTrigger plugin
@@ -21,6 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ProjectShowcase() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
+  const projects = useMemo(() => getShuffledProjects(), []);
 
   useEffect(() => {
     // GSAP MatchMedia for responsive behavior & accessibility
@@ -97,7 +98,7 @@ export default function ProjectShowcase() {
           <IntroPanel intro={showcaseIntro} />
 
           <div className="showcase-projects" role="region" aria-label="Project gallery">
-            {projectsData.map((project, index) => (
+            {projects.map((project, index) => (
               <ProjectCard
                 key={project.id}
                 project={project}

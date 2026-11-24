@@ -119,7 +119,6 @@ export default function ContactModal() {
     try {
       const formEl = event.target;
       const formData = new FormData(formEl);
-      formData.append("access_key", "9d52655e-6fe4-4514-87c5-ce4b49db1c00");
       formData.append("selected_tier", selectedTier.toUpperCase());
       formData.append("subject", `New Pointfex Project Inquiry [${selectedTier.toUpperCase()}]`);
 
@@ -227,7 +226,17 @@ export default function ContactModal() {
         </div>
 
         {/* Web3Forms Contact Form */}
-        <form className="contact-modal__form" onSubmit={onSubmit}>
+        <form
+          className="contact-modal__form"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          onSubmit={onSubmit}
+        >
+          <input
+            type="hidden"
+            name="access_key"
+            value="ed265639-b8ad-4bcf-9c22-0b61b7d0c042"
+          />
           {/* Row 1: Name and Email */}
           <div className="contact-modal__row">
             <div className="contact-modal__field">
